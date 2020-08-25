@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Particle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlendState>2</BlendState>
+    <TextureFile>Smoke.png</TextureFile>
+    <MaxParticles>184</MaxParticles>
+    <BlendSDurationtate>2.2650001</BlendSDurationtate>
+    <DurationRandomness>1.286</DurationRandomness>
+    <EmitterVelocitySensitivity>2.3150001</EmitterVelocitySensitivity>
+    <MinHorizontalVelocity>0</MinHorizontalVelocity>
+    <MaxHorizontalVelocity>15.756</MaxHorizontalVelocity>
+    <MinVerticalVelocity>0.322</MinVerticalVelocity>
+    <MaxVerticalVelocity>0.322</MaxVerticalVelocity>
+    <Gravity X="1.099" Y="9.8900003" Z="0"/>
+    <EndVelocity>2.2509999</EndVelocity>
+    <MinColor R="1e-06" G="9.9998999e-07" B="9.9998999e-07" A="1"/>
+    <MaxColor R="0.12096775" G="0" B="0" A="1"/>
+    <MinRotateSpeed>-10</MinRotateSpeed>
+    <MaxRotateSpeed>2.99</MaxRotateSpeed>
+    <MinStartSize>1</MinStartSize>
+    <MaxStartSize>5</MaxStartSize>
+    <MinEndSize>38</MinEndSize>
+    <MaxEndSize>62</MaxEndSize>
+</Particle>

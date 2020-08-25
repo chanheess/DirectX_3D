@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Material>
+        <Name>bark</Name>
+        <DiffuseFile>tileable_tree_bark_texture_by_ftourini-d3l69hz.jpg</DiffuseFile>
+        <SpecularFile>tileable_tree_bark_texture_by_ftourini-d3l69hz.jpg</SpecularFile>
+        <NormalFile>tileable_tree_bark_texture_by_ftourini-d3l69hznor.jpg</NormalFile>
+        <Ambient R="0.2" G="0.2" B="0.2" A="1"/>
+        <Diffuse R="0.80000001" G="0.80000001" B="0.80000001" A="1"/>
+        <Specular R="0.2" G="0.2" B="0.2" A="20"/>
+        <Emissive R="0" G="0" B="0" A="1"/>
+    </Material>
+    <Material>
+        <Name>LEaf</Name>
+        <DiffuseFile>TexturesCom_Branches0018_1_alphamasked_S.png</DiffuseFile>
+        <SpecularFile>TexturesCom_Branches0018_1_alphamasked_S.png</SpecularFile>
+        <NormalFile>TexturesCom_Branches0018_1_alphamasked_Snor.png</NormalFile>
+        <Ambient R="0.2" G="0.2" B="0.2" A="1"/>
+        <Diffuse R="0.80000001" G="0.80000001" B="0.80000001" A="1"/>
+        <Specular R="0.2" G="0.2" B="0.2" A="20"/>
+        <Emissive R="0" G="0" B="0" A="1"/>
+    </Material>
+</Materials>

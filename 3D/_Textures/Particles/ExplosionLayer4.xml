@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Particle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlendState>2</BlendState>
+    <TextureFile>gmdma.png</TextureFile>
+    <MaxParticles>358</MaxParticles>
+    <BlendSDurationtate>0.89600003</BlendSDurationtate>
+    <DurationRandomness>1.0930001</DurationRandomness>
+    <EmitterVelocitySensitivity>1.64</EmitterVelocitySensitivity>
+    <MinHorizontalVelocity>0.322</MinHorizontalVelocity>
+    <MaxHorizontalVelocity>15.113</MaxHorizontalVelocity>
+    <MinVerticalVelocity>0.322</MinVerticalVelocity>
+    <MaxVerticalVelocity>15.113</MaxVerticalVelocity>
+    <Gravity X="3.2969999" Y="-18.681" Z="1.075"/>
+    <EndVelocity>9.3249998</EndVelocity>
+    <MinColor R="1" G="0" B="0" A="1"/>
+    <MaxColor R="1" G="1" B="1" A="1"/>
+    <MinRotateSpeed>-1</MinRotateSpeed>
+    <MaxRotateSpeed>2.99</MaxRotateSpeed>
+    <MinStartSize>3</MinStartSize>
+    <MaxStartSize>4</MaxStartSize>
+    <MinEndSize>3</MinEndSize>
+    <MaxEndSize>11</MaxEndSize>
+</Particle>

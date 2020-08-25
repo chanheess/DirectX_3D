@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Battle.cpp">
+      <Filter>Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainLodDemo.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="RtvDemo.cpp" />
+    <ClCompile Include="TerrainEditor.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyDemo.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="Battle.h">
+      <Filter>Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainLodDemo.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="RtvDemo.h" />
+    <ClInclude Include="TerrainEditor.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyDemo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Battle">
+      <UniqueIdentifier>{5369de47-2cb8-4e67-bd83-8caee1f09546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{5c5abcbb-b993-4442-b1f6-a26a80cf5e67}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

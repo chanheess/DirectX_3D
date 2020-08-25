@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Particle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlendState>2</BlendState>
+    <TextureFile>Spray.png</TextureFile>
+    <MaxParticles>210</MaxParticles>
+    <BlendSDurationtate>5.862</BlendSDurationtate>
+    <DurationRandomness>1.64</DurationRandomness>
+    <EmitterVelocitySensitivity>1.64</EmitterVelocitySensitivity>
+    <MinHorizontalVelocity>0.322</MinHorizontalVelocity>
+    <MaxHorizontalVelocity>9.9680004</MaxHorizontalVelocity>
+    <MinVerticalVelocity>0.322</MinVerticalVelocity>
+    <MaxVerticalVelocity>7.395</MaxVerticalVelocity>
+    <Gravity X="3.2969999" Y="-12.088" Z="1.075"/>
+    <EndVelocity>4.1799998</EndVelocity>
+    <MinColor R="0.13725491" G="0.13725491" B="0.13725491" A="0.10588235"/>
+    <MaxColor R="0.17254902" G="0" B="0" A="0.13725491"/>
+    <MinRotateSpeed>-0.22499999</MinRotateSpeed>
+    <MaxRotateSpeed>0.67500001</MaxRotateSpeed>
+    <MinStartSize>19</MinStartSize>
+    <MaxStartSize>38</MaxStartSize>
+    <MinEndSize>1</MinEndSize>
+    <MaxEndSize>6</MaxEndSize>
+</Particle>
