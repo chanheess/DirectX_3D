@@ -4,15 +4,15 @@
 
 void ConvModel::Initialize()
 {
-	Airplane();
-	Tower();
-	Kachujin();
-	Tank();
+	//Airplane();
+	//Tower();
+	//Kachujin();
+	//Tank();
 
 	//Weapons();
 	//Monster();
-	//Player();
-	Trees();
+	Player();
+	//Trees();
 }
 
 void ConvModel::Airplane()
@@ -160,6 +160,27 @@ void ConvModel::Player()
 	conv = new Converter();
 	conv->ReadFile(L"Player/Running.fbx");
 	conv->ExportAnimClip(0, L"Player/Running");
+	SafeDelete(conv);
+
+	//arrow shoot move
+	conv = new Converter();
+	conv->ReadFile(L"Player/standing aim walk back.fbx");
+	conv->ExportAnimClip(0, L"Player/standing aim walk back");
+	SafeDelete(conv);
+
+	conv = new Converter();
+	conv->ReadFile(L"Player/standing aim walk forward.fbx");
+	conv->ExportAnimClip(0, L"Player/standing aim walk forward");
+	SafeDelete(conv);
+
+	conv = new Converter();
+	conv->ReadFile(L"Player/standing aim walk left.fbx");
+	conv->ExportAnimClip(0, L"Player/standing aim walk left");
+	SafeDelete(conv);
+
+	conv = new Converter();
+	conv->ReadFile(L"Player/standing aim walk right.fbx");
+	conv->ExportAnimClip(0, L"Player/standing aim walk right");
 	SafeDelete(conv);
 }
 

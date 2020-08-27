@@ -127,4 +127,5 @@ private:
 	VertexTextureNormalTangent* vertices;
 
 	bool isRender = false;
+	bool battleStyle = false;
 };

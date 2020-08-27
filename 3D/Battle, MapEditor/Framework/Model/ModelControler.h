@@ -14,7 +14,11 @@ private:
 		Damaged,
 		Death,
 		Dashed,
-		Running
+		Running,
+		RangeAttackMoveBack,
+		RangeAttackMoveForward,
+		RangeAttackMoveLeft,
+		RangeAttackMoveRight
 	} state;
 
 	enum PatrolState

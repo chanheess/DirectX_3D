@@ -70,14 +70,14 @@ void Freedom::Pos()
 		Rotation(&R);
 
 		//follow
-		if (lookStyle == false)
+		if (lookStyle == true)
 		{
 			P.x = sin(R.y) * cos(R.x) * distance;
 			P.y = sin(-R.x) * (distance + 30.0f);
 			P.z = cos(R.y) * cos(R.x) * distance;
 		}
 		//topdown
-		else if (lookStyle == true)
+		else if (lookStyle == false)
 		{
 			P.x = sin(R.y) * cos(R.x) * distance;
 			P.y = sin(-R.x) * (distance + 40.0f);
@@ -116,7 +116,7 @@ void Freedom::Rot()
 		Vector3 RD;
 		RotationDegree(&RD);
 
-		if (lookStyle == false)
+		if (lookStyle == true)
 		{
 			RD.x = RD.x + val.y * rotation * 0.2f;
 
@@ -147,12 +147,12 @@ void Freedom::LookAt(Vector3 pos, float scaleY)
 
 void Freedom::BattleViewStyle(bool style)
 {
-	if (style == false)	//3ÀÎÄª
+	if (style == true)	//3ÀÎÄª
 	{
 		if (changeLookAt == false)
 		{
 			changeLookAt = true;
-			lookStyle = false;
+			lookStyle = true;
 		}
 	}
 	else	//topdown
@@ -160,7 +160,7 @@ void Freedom::BattleViewStyle(bool style)
 		if (changeLookAt == false)
 		{
 			changeLookAt = true;
-			lookStyle = true;
+			lookStyle = false;
 		}
 	}
 }

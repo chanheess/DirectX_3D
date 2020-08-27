@@ -39,6 +39,12 @@ void Battle::Initialize()
 		//terrain->Pass(1);
 	}
 
+	// 전투스타일 설정   true : topDownView / false : 3dview
+	battleStyle = true;
+
+	//시야스타일   true : topDownView / false : 3dview
+	((Freedom *)Context::Get()->GetCamera())->BattleViewStyle(battleStyle);
+
 	//Mesh();
 	Player();
 	Monster();
@@ -71,8 +77,6 @@ void Battle::Initialize()
 	//
 	//tree->UpdateTransforms();
 
-	//시야스타일   true : topDownView / false : 3dview
-	((Freedom *)Context::Get()->GetCamera())->BattleViewStyle(false);
 	
 }
 
@@ -100,7 +104,7 @@ void Battle::Update()
 		static Vector3 pos2 = pos;
 		{
 			//move
-			if (playerControler[0]->MoveMode() && Mouse::Get()->Press(0) && playerControler[0]->AnimationState() != 9
+			if (playerControler[0]->MoveMode() == false && Mouse::Get()->Press(0) && playerControler[0]->AnimationState() != 9
 				&& AttackState[0] != PlayerAttackState::RangeAttack && playerControler[0]->AnimationState() != 8)
 			{
 				pos2 = terrain->GetPickedPosition();
@@ -114,9 +118,10 @@ void Battle::Update()
 				}
 			}
 			//move2
-			else if (playerControler[0]->MoveMode() && playerControler[0]->AnimationState() != 9
+			else if (playerControler[0]->MoveMode() == true && playerControler[0]->AnimationState() != 9
 				&& AttackState[0] != PlayerAttackState::RangeAttack && playerControler[0]->AnimationState() != 8)
 			{
+				//키입력됐을때만 실행
 				if (Keyboard::Get()->Press('A') || Keyboard::Get()->Press('D') ||
 					Keyboard::Get()->Press('W') || Keyboard::Get()->Press('S'))
 				{
@@ -170,22 +175,46 @@ void Battle::Update()
 		//SwordAttack & PunchAttack & DistanceAttack
 		if (playerControler[0]->AnimationState() != 8)
 		{
-			if (Keyboard::Get()->Press('X') && playerControler[0]->AnimationState() != 9
-				&& AttackState[0] != PlayerAttackState::RangeAttack)	//활 시위당기기
+			if (playerControler[0]->MoveMode() == false)
 			{
-				if (player->CurrEquip() == 2 && shootTime == false)
+				if (Keyboard::Get()->Press('X') && playerControler[0]->AnimationState() != 9
+					&& AttackState[0] != PlayerAttackState::RangeAttack)	//활 시위당기기
 				{
-					noAttack[0] = 1;
-					playerControler[0]->Attack(4, player->GetTransform(0), terrain->GetPickedPosition(), Keyboard::Get()->Press('X'));
+					if (player->CurrEquip() == 2 && shootTime == false)
+					{
+						noAttack[0] = 1;
+						playerControler[0]->Attack(4, player->GetTransform(0), terrain->GetPickedPosition(), Keyboard::Get()->Press('X'));
+					}
+				}
+				else if (Keyboard::Get()->Up('X') && playerControler[0]->AnimationState() != 9
+					&& AttackState[0] != PlayerAttackState::RangeAttack)	//활 쏘기
+				{
+					if (player->CurrEquip() == 2 && noAttack[0] == 1 && dontShootTime >= 1.0f)
+					{
+						noAttack[0] = 2;
+						playerControler[0]->Attack(4, player->GetTransform(0), terrain->GetPickedPosition(), Keyboard::Get()->Up('X'));
+					}
 				}
 			}
-			else if (Keyboard::Get()->Up('X') && playerControler[0]->AnimationState() != 9
-				&& AttackState[0] != PlayerAttackState::RangeAttack)	//활 쏘기
+			else if (playerControler[0]->MoveMode() == true)
 			{
-				if (player->CurrEquip() == 2 && noAttack[0] == 1 && dontShootTime >= 1.0f)
+				if (Mouse::Get()->Press(1) && playerControler[0]->AnimationState() != 9
+					&& AttackState[0] != PlayerAttackState::RangeAttack)	//활 시위당기기
 				{
-					noAttack[0] = 2;
-					playerControler[0]->Attack(4, player->GetTransform(0), terrain->GetPickedPosition(), Keyboard::Get()->Up('X'));
+					if (Mouse::Get()->Up(0) && playerControler[0]->AnimationState() != 9
+						&& AttackState[0] != PlayerAttackState::RangeAttack)	//활 쏘기
+					{
+						if (player->CurrEquip() == 2 && noAttack[0] == 1 && dontShootTime >= 1.0f)
+						{
+							noAttack[0] = 2;
+							playerControler[0]->Attack(4, player->GetTransform(0), terrain->GetPickedPosition(), Keyboard::Get()->Up('X'));
+						}
+					}
+					else if (player->CurrEquip() == 2 && shootTime == false && noAttack[0] != 2)
+					{
+						noAttack[0] = 1;
+						playerControler[0]->Attack(4, player->GetTransform(0), terrain->GetPickedPosition(), Keyboard::Get()->Press('X'));
+					}
 				}
 			}
 
@@ -268,7 +297,8 @@ void Battle::Update()
 				//dash skill
 				playerControler[0]->Dash(player->GetTransform(0), pos2, Keyboard::Get()->Down(VK_LSHIFT));
 				//player move
-				if (playerControler[0]->AnimationState() == 2 || playerControler[0]->AnimationState() == 10)
+				if (playerControler[0]->AnimationState() == 2 || playerControler[0]->AnimationState() == 10
+					|| playerControler[0]->AnimationState() == 6)
 				{
 					if (playerControler[0]->MoveMode() == false)
 						playerControler[0]->Move(player->GetTransform(0), pos2, false, player->CurrEquip(), terrain->GetHeight(pos));
@@ -916,7 +946,7 @@ void Battle::Render()
 
 
 	if (playerControler[0]->AnimationState() == 6 &&
-		(noAttack[0] == 2 || noAttack[0] == 1))
+		(noAttack[0] == 2))
 	{
 		for (UINT i = 0; i < ARROWCOUNT; i++)
 		{
@@ -927,7 +957,7 @@ void Battle::Render()
 	for (int i = 0; i < RANGEMONSTERCOUNT; i++)
 	{
 		if (rangeMonsterControler[i]->AnimationState() == 6 &&
-			(monsterNoAttack[i] == 2 || monsterNoAttack[i] == 1))
+			(monsterNoAttack[i] == 2))
 		{
 			monsterArrows[i]->Render();
 		}
@@ -1025,6 +1055,11 @@ void Battle::Player()
 	player->ReadClip(L"Player/Standing_Aim_Overdraw");	//7 활 조준
 	player->ReadClip(L"Player/Standing_Aim_Recoil");	//8 화살 발사
 	player->ReadClip(L"Player/Running");	//9
+	//arrow shoot move
+	player->ReadClip(L"Player/standing aim walk back");	//10
+	player->ReadClip(L"Player/standing aim walk forward");	//11
+	player->ReadClip(L"Player/standing aim walk left");	//12
+	player->ReadClip(L"Player/standing aim walk right");	//13
 
 	Transform attachTransform[2];
 
@@ -1073,7 +1108,7 @@ void Battle::Player()
 		playerControler[i] = new ModelControler();
 
 		//MoveModeSetting
-		playerControler[i]->InputMoveMode(true);
+		playerControler[i]->InputMoveMode(battleStyle);
 
 		noAttack.push_back(dontAttack);
 		playerTime.push_back(timing);
@@ -1401,7 +1436,28 @@ void Battle::PlayerAttackControl(UINT attackPlayer)
 			break;
 		case 6:
 			playerControler[0]->NoArrowShoot();
-			player->PlayClip(attackPlayer, 7, 1.0f, 0.3f);
+			if (Keyboard::Get()->Press('S'))
+			{
+				player->PlayClip(attackPlayer, 10, 1.0f, 0.3f);
+			}
+			else if (Keyboard::Get()->Press('W'))
+			{
+				player->PlayClip(attackPlayer, 11, 1.0f, 0.3f);
+			}
+			else if (Keyboard::Get()->Press('A'))
+			{
+				player->PlayClip(attackPlayer, 12, 1.0f, 0.3f);
+			}
+			else if (Keyboard::Get()->Press('D'))
+			{
+				player->PlayClip(attackPlayer, 13, 1.0f, 0.3f);
+			}
+			else
+			{
+				player->PlayClip(attackPlayer, 7, 1.0f, 0.3f);
+			}
+
+			
 			break;
 		}
 

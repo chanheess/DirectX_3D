@@ -527,11 +527,11 @@ void ModelControler::Move(Transform* pos, Vector3 pos2, bool patrol, UINT currEq
 	if (patrol == false)
 	{
 		if (currEq == 0)
-			move = pos->Forward() * 300.0f * Time::Get()->Delta();
+			move = pos->Forward() * 400.0f * Time::Get()->Delta();
 		else if (currEq == 1)
-			move = pos->Forward() * 150.0f * Time::Get()->Delta();
+			move = pos->Forward() * 250.0f * Time::Get()->Delta();
 		else if (currEq == 2)
-			move = pos->Forward() * 200.0f * Time::Get()->Delta();
+			move = pos->Forward() * 300.0f * Time::Get()->Delta();
 
 	}
 	else if (patrol == true)
@@ -588,7 +588,6 @@ void ModelControler::Move2(Transform * pos, UINT currEq, float posY)
 	if (state == AnimationState::Dashed ||
 		state == AnimationState::SwordAttack ||
 		state == AnimationState::PunchAttack ||
-		state == AnimationState::DistanceAttack ||
 		state == AnimationState::RangeAttack)
 	{
 		return;
@@ -604,6 +603,8 @@ void ModelControler::Move2(Transform * pos, UINT currEq, float posY)
 	//무기상태에 따른 모션조절
 	if (currEq == 0)
 		state = AnimationState::Running;
+	else if (state == AnimationState::DistanceAttack)
+		state = AnimationState::DistanceAttack;
 	else
 		state = AnimationState::Moving;
 
@@ -611,66 +612,143 @@ void ModelControler::Move2(Transform * pos, UINT currEq, float posY)
 	{
 		if (Keyboard::Get()->Press('A'))
 		{
-			if (currEq == 0)
-				move = pos->Forward() * 300.0f * Time::Get()->Delta();
-			else if (currEq == 1)
-				move = pos->Forward() * 150.0f * Time::Get()->Delta();
-			else if (currEq == 2)
-				move = pos->Forward() * 200.0f * Time::Get()->Delta();
+			//bow move
+			if (state == AnimationState::DistanceAttack)
+			{
+				//move speed and direction
+				if (currEq == 2)
+				{
+					if (Keyboard::Get()->Press('W'))
+						move = (-pos->Right() + pos->Forward()) * 230.0f * Time::Get()->Delta();
+					else if (Keyboard::Get()->Press('S'))
+						move = (-pos->Right() - pos->Forward()) * 230.0f * Time::Get()->Delta();
+					else
+						move = -pos->Right() * 280.0f * Time::Get()->Delta();
+				}
 
-			position1 -= move;
-			if (Keyboard::Get()->Press('W'))
-				rotation1.y = rotation.y - 235.0f;
-			else if (Keyboard::Get()->Press('S'))
-				rotation1.y = rotation.y - 315.0f;
+				if (state == AnimationState::DistanceAttack)
+					rotation1.y = rotation.y - 180.0f;
+			}
+			//defalut move
 			else
-				rotation1.y = rotation.y - 270.0f;
+			{
+				//move speed and direction
+				if (currEq == 0)
+					move = pos->Forward() * 400.0f * Time::Get()->Delta();
+				else if (currEq == 1)
+					move = pos->Forward() * 250.0f * Time::Get()->Delta();
+				else if (currEq == 2)
+					move = pos->Forward() * 300.0f * Time::Get()->Delta();
+
+				//move rotation
+				if (Keyboard::Get()->Press('W'))
+					rotation1.y = rotation.y - 235.0f;
+				else if (Keyboard::Get()->Press('S'))
+					rotation1.y = rotation.y - 315.0f;
+				else
+					rotation1.y = rotation.y - 270.0f;
+			}
+			
+			position1 -= move;
 		}
 		else if (Keyboard::Get()->Press('D'))
 		{
-			if (currEq == 0)
-				move = pos->Forward() * 300.0f * Time::Get()->Delta();
-			else if (currEq == 1)
-				move = pos->Forward() * 150.0f * Time::Get()->Delta();
-			else if (currEq == 2)
-				move = pos->Forward() * 200.0f * Time::Get()->Delta();
+			//bow move
+			if (state == AnimationState::DistanceAttack)
+			{
+				//move speed and direction
+				if (currEq == 2)
+				{
+					if (Keyboard::Get()->Press('W'))
+						move = (pos->Right() + pos->Forward()) * 230.0f * Time::Get()->Delta();
+					else if (Keyboard::Get()->Press('S'))
+						move = (pos->Right() - pos->Forward()) * 230.0f * Time::Get()->Delta();
+					else
+						move = pos->Right() * 280.0f * Time::Get()->Delta();
+				}
 
-			position1 -= move;
-			if (Keyboard::Get()->Press('W'))
-				rotation1.y = rotation.y - 135.0f;
-			else if (Keyboard::Get()->Press('S'))
-				rotation1.y = rotation.y - 45.0f;
+				if (state == AnimationState::DistanceAttack)
+					rotation1.y = rotation.y - 180.0f;
+			}
 			else
-				rotation1.y = rotation.y - 90.0f;
+			{
+				//move speed and direction
+				if (currEq == 0)
+					move = pos->Forward() * 400.0f * Time::Get()->Delta();
+				else if (currEq == 1)
+					move = pos->Forward() * 250.0f * Time::Get()->Delta();
+				else if (currEq == 2)
+					move = pos->Forward() * 300.0f * Time::Get()->Delta();
+
+				//move rotation
+				if (Keyboard::Get()->Press('W'))
+					rotation1.y = rotation.y - 135.0f;
+				else if (Keyboard::Get()->Press('S'))
+					rotation1.y = rotation.y - 45.0f;
+				else
+					rotation1.y = rotation.y - 90.0f;
+			}
+			
+			position1 -= move;
 		}
 		else if (Keyboard::Get()->Press('W'))
 		{
-			if (currEq == 0)
-				move = pos->Forward() * 300.0f * Time::Get()->Delta();
-			else if (currEq == 1)
-				move = pos->Forward() * 150.0f * Time::Get()->Delta();
-			else if (currEq == 2)
-				move = pos->Forward() * 200.0f * Time::Get()->Delta();
+			//bow move
+			if (state == AnimationState::DistanceAttack)
+			{
+				//move speed and direction
+				if (currEq == 2)
+					move = pos->Forward() * 280.0f * Time::Get()->Delta();
+			}
+			//defalut move
+			else
+			{
+				if (currEq == 0)
+					move = pos->Forward() * 400.0f * Time::Get()->Delta();
+				else if (currEq == 1)
+					move = pos->Forward() * 250.0f * Time::Get()->Delta();
+				else if (currEq == 2)
+					move = pos->Forward() * 300.0f * Time::Get()->Delta();
 
-			position1 -= move;
+			}
+
 			rotation1.y = rotation.y - 180.0f;
+			position1 -= move;
 		}
 		else if (Keyboard::Get()->Press('S'))
 		{
-			if (currEq == 0)
-				move = pos->Forward() * 300.0f * Time::Get()->Delta();
-			else if (currEq == 1)
-				move = pos->Forward() * 150.0f * Time::Get()->Delta();
-			else if (currEq == 2)
-				move = pos->Forward() * 200.0f * Time::Get()->Delta();
+			//bow move
+			if (state == AnimationState::DistanceAttack)
+			{
+				//move speed and direction
+				if (currEq == 2)
+					move = -pos->Forward() * 280.0f * Time::Get()->Delta();
+
+				if (state == AnimationState::DistanceAttack)
+					rotation1.y = rotation.y - 180.0f;
+			}
+			else
+			{
+				if (currEq == 0)
+					move = pos->Forward() * 400.0f * Time::Get()->Delta();
+				else if (currEq == 1)
+					move = pos->Forward() * 250.0f * Time::Get()->Delta();
+				else if (currEq == 2)
+					move = pos->Forward() * 300.0f * Time::Get()->Delta();
+
+				rotation1.y = rotation.y;
+			}
 
 			position1 -= move;
-			rotation1.y = rotation.y;
 		}
 		else
 		{
+			if (state == AnimationState::DistanceAttack)
+			{
+				//defalut
+			}
 			//공격안하고 움직이지도 않을때 멈추기
-			if (state != AnimationState::SwordAttack ||
+			else if (state != AnimationState::SwordAttack ||
 				state != AnimationState::PunchAttack ||
 				state != AnimationState::DistanceAttack)
 				state = AnimationState::Idle;
