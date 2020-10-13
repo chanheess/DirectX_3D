@@ -313,7 +313,7 @@ void ModelControler::Dash(Transform* pos, Vector3 pos2, bool input)
 		state = AnimationState::Dashed;
 
 		//move2
-		if(moveMode == true)
+		if (moveMode == true)
 			pos2 = position1 - pos->Forward() * 30.0f;
 
 		Vector3 normal1;
@@ -375,50 +375,80 @@ void ModelControler::Dash(Transform* pos, Vector3 pos2, bool input)
 	pos->Position(position1);
 }
 
-void ModelControler::DistanceAttacked(Transform* pos, Vector3 pos2)
+void ModelControler::DistanceAttacked(Transform* pos, Vector3 pos2)	//state랑 관계없음 그냥 화살전용
 {
 	pos->Position(&position2);
 
-	if (bfirstArrow == false)
+	if (arrowState == ArrowState::ArrowReload)
 	{
 		firstArrow = position2;
 
 		//move2
 		if (moveMode == true)
-			pos2 = position1 - pos->Forward() * 1.0f;
+		{
+			arriveArrow = position2 - pos->Up() * 200.0f;
+			arriveArrow.y = 0;
+		}
+		else if (moveMode == false)
+		{
+			arriveArrow = pos2;
+			arriveArrow.y = 0;
+		}
 
-		arriveArrow = pos2;
+		Vector3 normal;
+		normal = arriveArrow - firstArrow;
 
-		state = AnimationState::DistanceAttack;
-
-		Vector3 normal1;
-		normal1 = -pos->Forward();
-
-		Vector3 normal2;
-		normal2 = arriveArrow - firstArrow;
-
-		D3DXVec3Normalize(&normal1, &normal1);
-		D3DXVec3Normalize(&normal2, &normal2);
+		D3DXVec3Normalize(&normal, &normal);
 
 		//도착지 설정
-		arrival = firstArrow + normal2 * 100.0f;
+		arrival = firstArrow + normal * 200.0f;
 
-		move = normal2 * 0.8f;
+		moveArrow = normal * 0.8f;
 
-		bfirstArrow = true;
+		arrowState = ArrowState::ArrowShoot;
 	}
 
 	//ArriveDistance
-	distance = sqrt((arrival.z - position2.z) * (arrival.z - position2.z) +
-		(arrival.x - position2.x) * (arrival.x - position2.x));
-
-
-	if (arrival != Vector3(-5, 0, -5) && (distance < 0.15f) != true)
+	if (arrowState == ArrowState::ArrowShoot)
 	{
-		position2 += move;
+		distance = sqrt((arrival.z - position2.z) * (arrival.z - position2.z) +
+		(arrival.x - position2.x) * (arrival.x - position2.x));
+	}
+
+
+	if ((distance < 1.0f) != true && arrowState == ArrowState::ArrowShoot)
+	{
+		position2 += moveArrow;
+	}
+	else
+	{
+		if (arrowState != ArrowState::ArrowHit)
+			arrowState = ArrowState::ArrowMiss;
 	}
 
 	pos->Position(position2);
+}
+
+void ModelControler::InputArrowState(UINT input)
+{
+	switch (input)
+	{
+	case 1:
+		arrowState = ArrowState::ArrowIdle;
+		break;
+	case 2:
+		arrowState = ArrowState::ArrowReload;
+		break;
+	case 3:
+		arrowState = ArrowState::ArrowShoot;
+		break;
+	case 4:
+		arrowState = ArrowState::ArrowHit;
+		break;
+	case 5:
+		arrowState = ArrowState::ArrowMiss;
+		break;
+	}
 }
 
 void ModelControler::Move(Transform* pos, Vector3 pos2, bool patrol, UINT currEq, float posY)

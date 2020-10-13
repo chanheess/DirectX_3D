@@ -141,4 +141,5 @@ private:
 private:
 	UINT FrameCycle[MONSTERCOUNT];
 	UINT equip = 0;
+	int cycling[MONSTERCOUNT];
 };

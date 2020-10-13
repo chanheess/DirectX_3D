@@ -36,15 +36,13 @@ private:
 
 	void AddSpotLights();
 
-	//Vector3 GetPickedPosition();
-
 private:
 	ModelRender* tree;
-
 
 	Shader* shader;
 	Shadow* shadow;
 
+private:	//range skill
 	ParticleSystem* explosion[PARTICLECOUNT];
 	float rangeSkillDelay = 0;
 	int rangeSkillCount = 0;
@@ -52,6 +50,7 @@ private:
 	Vector3 rangeCameraPos{ 0,0,0 };
 	Vector3 rangeSkillPos = { 0,0,0 };
 
+private:
 	//Player & monsters
 	enum PlayerAttackState
 	{
@@ -64,7 +63,7 @@ private:
 
 	vector<PlayerAttackState> AttackState;
 	vector<PlayerAttackState> MonsterAttackState;
-	vector<UINT> noAttack;
+	vector<UINT> noAttack;	//플레이어 공격 애니메이션 컨트롤
 	vector<UINT> monsterNoAttack;
 
 	class HpBar* playerHp;
@@ -73,13 +72,21 @@ private:
 	bool playerDeath = false;	//플레이어 죽었나
 
 	UINT dontAttack = 0;
+
+private:
+	//활
+	Vector3 arrowStartPos;
+	Vector3 arrowStartRot;
+	Vector3 arrowStartScale;
 	float dontShootTime = 0;	//활쏘기 쿨타임
 	bool shootTime = false;	//활쏘기 쿨타임용
+	bool shootMotion = false;	//활쏘기 모션
 	vector<float> playerTime;
 	vector<float> monsterTime;	//나중에 리스폰을 만들자!
 	vector<float> rangeMonsterTime;	//활 전용
 	float timing = 0.0f;
-
+	
+private:
 	ColliderObjectDesc** playerColliders;
 	ColliderObjectDesc** playerArrowColliders;
 	ColliderObjectDesc** weaponColliders;
@@ -109,8 +116,10 @@ private:
 	ModelControler* playerControler[PLAYERCOUNT];
 	ModelControler* monsterControler[MONSTERCOUNT];
 	ModelControler* rangeMonsterControler[RANGEMONSTERCOUNT];
-	///=================================
 
+	Vector3 mousePos{0,0,0};	//mousePos
+
+private:
 	Sky* skyDome;
 	Water* water;
 

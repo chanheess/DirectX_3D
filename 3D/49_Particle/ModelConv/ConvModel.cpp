@@ -182,6 +182,11 @@ void ConvModel::Player()
 	conv->ReadFile(L"Player/standing aim walk right.fbx");
 	conv->ExportAnimClip(0, L"Player/standing aim walk right");
 	SafeDelete(conv);
+
+	conv = new Converter();
+	conv->ReadFile(L"Player/Sword_Attack_360Rolling.fbx");
+	conv->ExportAnimClip(0, L"Player/Sword_Attack_360Rolling");
+	SafeDelete(conv);
 }
 
 void ConvModel::Monster()

@@ -25,6 +25,7 @@ ModelAnimator::ModelAnimator(Shader * shader)
 	for (int i = 0; i < MONSTERCOUNT; i++)
 	{
 		FrameCycle[i] = 0;
+		cycling[i] = 0;
 	}
 }
 
@@ -187,7 +188,7 @@ void ModelAnimator::ReadClip(wstring file)
 
 void ModelAnimator::PlayClip(UINT instance, UINT clip, float speed, float takeTime)
 {
-	if (tweenDesc[instance].Curr.Clip == clip) return;	//
+	if (tweenDesc[instance].Curr.Clip == clip) return;	//시작된 클립이 끊기지않게
 
 	tweenDesc[instance].TakeTime = takeTime;
 	tweenDesc[instance].Next.Clip = clip;
@@ -198,15 +199,22 @@ UINT ModelAnimator::StopClip(UINT instance, UINT clip)
 {
 	if (tweenDesc[instance].Curr.Clip == clip)
 	{
-		int cycling = FrameCycle[instance] * 2;
-		if (cycling != 0)
+		cycling[instance] = FrameCycle[instance];
+		if (cycling[instance] != 0)
 		{
+			cycling[instance] = 0;
 			FrameCycle[instance] = 0;
 			return true;
+		}
+		else
+		{
+			cycling[instance] = 0;
+			FrameCycle[instance] = 0;
 		}
 	}
 	else
 	{
+		cycling[instance] = 0;
 		FrameCycle[instance] = 0;
 	}
 
