@@ -513,11 +513,10 @@ float4 PS_TerrainLod_Shadow(DomainOutput_TerrainLod input) : SV_Target
     float4 colors3 = GetLayerColor3(currColor, input.Uv);
     currColor = colors3;
     
+    float NdotL = dot(-GlobalLight.Direction, normalize(normal));
    
-    float4 result = currColor + brush;
+    float4 result = currColor * NdotL + brush;
     
-    float3 direction = -GlobalLight.Direction;
-    float NdotL = dot(direction, normalize(normal));
     
-    return currColor * NdotL + brush;
+    return result;
 }

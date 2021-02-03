@@ -5,7 +5,7 @@ Render2D::Render2D(wstring shaderFile)
 	: pass(0)
 {
 	if (shaderFile.length() < 1)
-		shaderFile = L"29_Render2D.fx";
+		shaderFile = L"29_Render2D.fxo";
 
 	shader = new Shader(shaderFile);
 

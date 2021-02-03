@@ -313,7 +313,7 @@ float4 PS_AllLight(MeshOutput input)
     AddMaterial(result, output);
     
     float4 color = float4(MaterialToColor(result), 1.0f);
-    //color =  CalculateFogColor(color, input.wPosition);
+    color =  CalculateFogColor(color, input.wPosition);
     
     return float4(color.rgb, 1.0f);
 }

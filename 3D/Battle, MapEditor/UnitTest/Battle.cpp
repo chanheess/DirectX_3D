@@ -56,10 +56,10 @@ void Battle::Initialize()
 	explosion[2] = new ParticleSystem(L"ExplosionLayer3");
 	explosion[3] = new ParticleSystem(L"ExplosionLayer4");
 
-	playerHp = new HpBar(100);
+	playerHp = new HpBar(100, true);
 
 	for (UINT i = 0; i < MONSTERCOUNT + RANGEMONSTERCOUNT; i++)
-		monsterHp[i] = new HpBar(100);
+		monsterHp[i] = new HpBar(100, false);
 
 
 
@@ -238,35 +238,47 @@ void Battle::Update()
 						if (Keyboard::Get()->Press('X'))
 							dontShootTime += Time::Get()->Delta();
 						if (Keyboard::Get()->Up('X') && dontShootTime < 0.3f)
+						{
 							dontShootTime = 0.0f;
+							playerControler[0]->InputArrowState(1);
+							noAttack[0] = 0;
+						}
 					}
 					else if (playerControler[0]->MoveMode() == true)
 					{
 						if (Mouse::Get()->Press(0))
 							dontShootTime += Time::Get()->Delta();
 						if (Mouse::Get()->Up(0) && dontShootTime < 0.3f)
+						{
 							dontShootTime = 0.0f;
+							playerControler[0]->InputArrowState(1);
+							noAttack[0] = 0;
+						}
 					}
 
+					//화살의 피격 판정
 					if (playerControler[0]->ArrowState() == 4 || playerControler[0]->ArrowState() == 5)
 					{
-						shootTime = true;
 						noAttack[0] = 0;
 						playerTime[0] = 0;
 						playerControler[0]->InputArrowState(1);
 						AttackState[0] = PlayerAttackState::Idle;
-					}
 
-					if (dontShootTime >= 0.3f && shootTime == true)
-					{
-						dontShootTime = 0.0f;
-						shootTime = false;
+						player->PlayClip(0, 0, 1.0f, 0.0f);
+						playerControler[0]->StopDash();
+
+						if (dontShootTime >= 0.3f && shootTime == true)
+						{
+							dontShootTime = 0.0f;
+							shootTime = false;
+						}
 					}
 
 					if (noAttack[0] == 2 && (playerControler[0]->ArrowState() == 2 || playerControler[0]->ArrowState() == 3))
 					{
 						playerControler[0]->DistanceAttacked(playerArrows[0]->GetTransform(0), terrain->GetPickedPosition());
 						playerArrows[0]->UpdateTransforms();
+						shootTime = true;
 
 						if (playerTime[0] > 0.0f)
 						{
@@ -335,7 +347,6 @@ void Battle::Update()
 						mousePos = terrain->GetPickedPosition();
 			}
 		}//if (playerControler[0]->AnimationState() != 8)end
-
 
 		playerHp->HpTransform(player->GetTransform(0));	// 플레이어 체력
 
@@ -416,8 +427,9 @@ void Battle::Update()
 				if (AttackState[0] == PlayerAttackState::SwordAttack ||
 					AttackState[0] == PlayerAttackState::PunchAttack ||
 					AttackState[0] == PlayerAttackState::DistanceAttack)
-					AttackState[0] = PlayerAttackState::Idle;
-				player->PlayClip(0, 6, 1.5f, 0.1f);
+						AttackState[0] = PlayerAttackState::Idle;
+
+				player->PlayClip(0, 6, 2.0f, 0.1f);
 
 				for (UINT i = 0; i < MONSTERCOUNT + RANGEMONSTERCOUNT; i++)
 					playerToMonster[i] = false;
@@ -980,21 +992,6 @@ void Battle::Render()
 	monster->Render();
 	rangeMonster->Render();
 
-	if (playerControler[0]->AnimationState() != 8)
-		playerHp->Render();
-
-	for (UINT i = 0; i < MONSTERCOUNT + RANGEMONSTERCOUNT; i++)
-	{
-		if (monsterControler[i]->AnimationState() != 8 && i < MONSTERCOUNT)
-		{
-			monsterHp[i]->Render();
-		}
-		else if (rangeMonsterControler[i - MONSTERCOUNT]->AnimationState() != 8 && MONSTERCOUNT <= i)
-		{
-			monsterHp[i]->Render();
-		}
-	}
-
 	if (noAttack[0] == 2 || playerControler[0]->ArrowState() == 2 ||
 		playerControler[0]->ArrowState() == 3)
 	{
@@ -1049,8 +1046,23 @@ void Battle::Render()
 		}
 	}
 
-	water->Pass(16);
-	water->Render();
+	//water->Pass(16);
+	//water->Render();
+
+	if (playerControler[0]->AnimationState() != 8)
+		playerHp->Render();
+
+	for (UINT i = 0; i < MONSTERCOUNT + RANGEMONSTERCOUNT; i++)
+	{
+		if (monsterControler[i]->AnimationState() != 8 && i < MONSTERCOUNT)
+		{
+			monsterHp[i]->Render();
+		}
+		else if (rangeMonsterControler[i - MONSTERCOUNT]->AnimationState() != 8 && MONSTERCOUNT <= i)
+		{
+			monsterHp[i]->Render();
+		}
+	}
 }
 
 //void Battle::Mesh()
@@ -1504,7 +1516,8 @@ void Battle::PlayerAttackControl(UINT attackPlayer)
 			}
 			else if (playerControler[0]->MoveMode() == false)
 			{
-				player->PlayClip(attackPlayer, 7, 1.0f, 0.3f);
+				if (playerControler[0]->ArrowState() == 2)
+					player->PlayClip(attackPlayer, 7, 1.0f, 0.3f);
 			}
 
 			break;
@@ -1539,14 +1552,11 @@ void Battle::PlayerAttackControl(UINT attackPlayer)
 			}
 			break;
 		case 2:
-			if (shootMotion == false)
+			player->PlayClip(attackPlayer, 8, 1.0f, 0.0f);
+
+			if (player->StopClip(0, 8) == true)
 			{
-				player->PlayClip(attackPlayer, 8, 1.0f, 0.5f);
-			}
-			if (player->StopClip(attackPlayer, 8) == true)
-			{
-				shootMotion = true;
-				player->PlayClip(attackPlayer, 0, 0.8f, 0.0f);
+				player->PlayClip(0, 0, 1.0f, 0.0f);
 				playerControler[0]->StopDash();
 			}
 

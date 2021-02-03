@@ -314,7 +314,7 @@ void ModelControler::Dash(Transform* pos, Vector3 pos2, bool input)
 
 		//move2
 		if (moveMode == true)
-			pos2 = position1 - pos->Forward() * 30.0f;
+			pos2 = position1 - pos->Forward() * 40.0f;
 
 		Vector3 normal1;
 		normal1 = -pos->Forward();
@@ -353,21 +353,25 @@ void ModelControler::Dash(Transform* pos, Vector3 pos2, bool input)
 			rotation1.y += angle;
 
 		//µµÂøÁö ¼³Á¤
-		arrival = position1 + normal2 * 30.0f;
+		arrival = position1 + normal2 * 40.0f;
 
-		move = normal2 * 0.2f;
+		move = normal2 * 0.4f;
 	}
 
 	//ArriveDistance
-	distance = sqrt((arrival.z - position1.z) * (arrival.z - position1.z) +
+	dashDistance = sqrt((arrival.z - position1.z) * (arrival.z - position1.z) +
 		(arrival.x - position1.x) * (arrival.x - position1.x));
 
 
 	if (state == AnimationState::Dashed)
 	{
-		if (arrival != Vector3(-5, 0, -5) && (distance < 0.15f) != true)
+		if (arrival != Vector3(-5, 0, -5) && (dashDistance < 0.15f) != true)
 		{
 			position1 += move;
+		}
+
+		else {
+			
 		}
 	}
 
@@ -411,18 +415,18 @@ void ModelControler::DistanceAttacked(Transform* pos, Vector3 pos2)	//state¶û °ü
 	//ArriveDistance
 	if (arrowState == ArrowState::ArrowShoot)
 	{
-		distance = sqrt((arrival.z - position2.z) * (arrival.z - position2.z) +
+		arrowDistance = sqrt((arrival.z - position2.z) * (arrival.z - position2.z) +
 		(arrival.x - position2.x) * (arrival.x - position2.x));
 	}
 
 
-	if ((distance < 1.0f) != true && arrowState == ArrowState::ArrowShoot)
+	if ((arrowDistance < 1.0f) != true && arrowState == ArrowState::ArrowShoot)
 	{
 		position2 += moveArrow;
 	}
 	else
 	{
-		if (arrowState != ArrowState::ArrowHit)
+		if (arrowState != ArrowState::ArrowHit || ArrowState::ArrowShoot)
 			arrowState = ArrowState::ArrowMiss;
 	}
 

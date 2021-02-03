@@ -3,7 +3,7 @@
 class HpBar
 {
 public:
-	HpBar(float hp);
+	HpBar(float hp, bool player);	//player : true / monster : false
 	~HpBar();
 
 	void Update();
@@ -19,10 +19,15 @@ private:
 private:
 	Shader* shader;
 
-	MeshRender* hpBackground;
 	MeshRender* hpBar;
+
+	RenderTarget* renderTarget;
+	DepthStencil* depthStencil;
+	Render2D* hpBar2d;
 
 	float fullHp;
 	float currHp;
 	float damegedHpPos;
+
+	bool bPlayer;	//player : true / monster : false
 };

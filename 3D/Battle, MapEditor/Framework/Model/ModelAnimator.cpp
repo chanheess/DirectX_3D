@@ -195,7 +195,7 @@ void ModelAnimator::PlayClip(UINT instance, UINT clip, float speed, float takeTi
 	tweenDesc[instance].Next.Speed = speed;
 }
 
-UINT ModelAnimator::StopClip(UINT instance, UINT clip)
+bool ModelAnimator::StopClip(UINT instance, UINT clip)
 {
 	if (tweenDesc[instance].Curr.Clip == clip)
 	{

@@ -1,5 +1,6 @@
 #include "00_Global.fx"
 #include "00_Light.fx"
+#include "00_Render.fx"
 
 cbuffer CB_Render2D
 {

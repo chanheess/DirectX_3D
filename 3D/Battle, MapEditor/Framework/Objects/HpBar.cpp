@@ -1,8 +1,8 @@
 #include "Framework.h"
 #include "HpBar.h"
 
-HpBar::HpBar(float hp)
-	: fullHp(hp), currHp(hp)
+HpBar::HpBar(float hp, bool player)
+	: fullHp(hp), currHp(hp), bPlayer(player)
 {
 	shader = new Shader(L"P_HpBar.fxo");
 
@@ -16,17 +16,19 @@ HpBar::~HpBar()
 
 void HpBar::Update()
 {
-	hpBackground->Update();
-	hpBackground->UpdateTransforms();
-
 	hpBar->Update();
 	hpBar->UpdateTransforms();
+
+	if (bPlayer == true)
+		hpBar2d->Update();
 }
 
 void HpBar::Render()
 {
-	hpBackground->Render();
 	hpBar->Render();
+
+	if (bPlayer == true)
+		hpBar2d->Render();
 }
 
 void HpBar::HpTransform(Transform* transform)
@@ -40,56 +42,33 @@ void HpBar::HpTransform(Transform* transform)
 	hpBar->GetTransform(0)->Scale(&scale2);
 
 	pos.y = pos.y + scale.y * 200.0f + scale2.y * 0.5f;
-	hpBar->GetTransform(0)->Position(pos.x - damegedHpPos, pos.y, pos.z);
-
-	pos.z = pos.z + 0.03f;
-	hpBackground->GetTransform(0)->Position(pos);
-
+	hpBar->GetTransform(0)->Position(pos.x, pos.y, pos.z);
 
 	{
-		/*int rot = (int)rotation.y;
-		rot = abs(rot);
-		rot %= 360;
-		if (rot >= 90 && rot <= 270)
-		{
-			pos.z = pos.z - 0.1f;
-			ImGui::InputFloat3("sssss", pos);
-
-		}
-		else
-		{
-			pos.z = pos.z + 0.1f;
-			ImGui::InputFloat3("sss", pos);
-
-		}*/
 		Vector3 rotation;
 		Context::Get()->GetCamera()->RotationDegree(&rotation);
 		hpBar->GetTransform(0)->RotationDegree(rotation);
-		hpBackground->GetTransform(0)->RotationDegree(rotation);
 	}
 }
 
 void HpBar::Dameged(float damege)
 {
-	Vector3 scale;
-	hpBar->GetTransform(0)->Scale(&scale);
-
 	//damege
 	currHp -= damege;
 
-	//scale
-	float ratioHpScale = currHp / fullHp;
-	scale.x = 5.0f * ratioHpScale;
-
-	//pos
-	float totalDamege = fullHp - currHp;
-	float ratioHpPos = 5.0f * (totalDamege / fullHp);
-	damegedHpPos = ratioHpPos * 0.5f;
-
-	hpBar->GetTransform(0)->Scale(scale);
+	//ratioHp
+	float ratioHp = currHp / fullHp;
+	shader->AsScalar("ratioHp")->SetFloat(ratioHp);
 
 	hpBar->Update();
 	hpBar->UpdateTransforms();
+
+	if (bPlayer == true)
+	{
+		hpBar2d->GetShader()->AsScalar("ratioHp")->SetFloat(ratioHp);
+
+		hpBar2d->Update();
+	}
 }
 
 void HpBar::CreateHp()
@@ -104,15 +83,25 @@ void HpBar::CreateHp()
 		transform->Scale(5, 1, 1);
 		hpBar->UpdateTransforms();
 		hpBar->Pass(0);
+
+		//ratioHp
+		float ratioHp = currHp / fullHp;
+		shader->AsScalar("ratioHp")->SetFloat(ratioHp);
 	}
 
-	//hpBackground
+	//hpBar2D
+	if (bPlayer == true)
 	{
-		hpBackground = new MeshRender(shader, new MeshQuad());
-		transform = hpBackground->AddTransform();
-		transform->Position(0, 0, 0);
-		transform->Scale(5, 1, 1);
-		hpBackground->UpdateTransforms();
-		hpBackground->Pass(1);
+		renderTarget = new RenderTarget();
+
+		hpBar2d = new Render2D(L"P_HpBar.fxo");
+		hpBar2d->GetTransform()->Position(650, 50, 0);
+		hpBar2d->GetTransform()->Scale(200, 30, 1);
+		hpBar2d->SRV(renderTarget->SRV());
+		hpBar2d->Pass(1);
+
+		//ratioHp
+		float ratioHp = currHp / fullHp;
+		hpBar2d->GetShader()->AsScalar("ratioHp")->SetFloat(ratioHp);
 	}
 }

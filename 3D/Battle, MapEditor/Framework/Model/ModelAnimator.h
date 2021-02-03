@@ -15,8 +15,8 @@ public:
 	void ReadMesh(wstring file);
 	void ReadClip(wstring file);
 
+	bool StopClip(UINT instance, UINT clip);
 	void PlayClip(UINT instance, UINT clip, float speed = 1.0f, float takeTime = 1.0f);
-	UINT StopClip(UINT instance, UINT clip);
 	void Equipment(UINT weaponNum = 0);
 	UINT CurrEquip() { return equip; }
 

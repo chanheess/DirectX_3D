@@ -76,9 +76,12 @@ private:
 	Vector3 firstArrow{ 0,0,0 };
 	Vector3 arriveArrow{ 0,0,0 };
 	Vector3 moveArrow{ 0,0,0 };
+	float arrowDistance = 0;
 
 	//格利瘤客狼 芭府
 	float distance = 0;
+	float dashDistance = 0;
+
 	bool outRange = false;
 	bool lockOn = false;
 
