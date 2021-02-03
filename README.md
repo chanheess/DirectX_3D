@@ -1,6 +1,4 @@
-# DirectX3D_Portfolio
- DirectX3D_Portfolio
-
+# DirectX3D_Portfolio 코드 리스트
 
 DirectX를 통한 전투와 맵을 구현하였습니다.
 
