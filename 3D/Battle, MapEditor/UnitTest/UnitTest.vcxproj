@@ -149,22 +149,16 @@
   <ItemGroup>
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="RtvDemo.cpp" />
-    <ClCompile Include="SkyDemo.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TerrainEditor.cpp" />
-    <ClCompile Include="TerrainLodDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battle.h" />
     <ClInclude Include="Main.h" />
-    <ClInclude Include="RtvDemo.h" />
-    <ClInclude Include="SkyDemo.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TerrainEditor.h" />
-    <ClInclude Include="TerrainLodDemo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,14 +6,9 @@
     <ClCompile Include="Battle.cpp">
       <Filter>Battle</Filter>
     </ClCompile>
-    <ClCompile Include="TerrainLodDemo.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="RtvDemo.cpp" />
     <ClCompile Include="TerrainEditor.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="SkyDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -21,14 +16,9 @@
     <ClInclude Include="Battle.h">
       <Filter>Battle</Filter>
     </ClInclude>
-    <ClInclude Include="TerrainLodDemo.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="RtvDemo.h" />
     <ClInclude Include="TerrainEditor.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="SkyDemo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Battle">

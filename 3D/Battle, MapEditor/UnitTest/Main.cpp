@@ -2,18 +2,12 @@
 #include "Main.h"
 #include "Systems/Window.h"
 
-#include "RtvDemo.h"
-#include "SkyDemo.h"
 #include "Battle.h"
-#include "TerrainLodDemo.h"
 #include "TerrainEditor.h"
 
 void Main::Initialize()
 {
-	//Push(new SkyDemo());
 	//Push(new TerrainEditor());
-	//Push(new RtvDemo());
-	//Push(new TerrainLodDemo());
 	Push(new Battle());
 }
 
