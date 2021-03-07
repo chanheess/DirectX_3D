@@ -20,8 +20,6 @@ void TerrainEditor::Initialize()
 	terrain->LayerMap(L"Terrain/Grass (Hill).jpg", L"Terrain/Gray256.png");
 	terrain->Pass(1);
 
-	sky = new CubeSky(L"Environment/GrassCube1024.dds");
-
 	billboardShader = new Shader(L"26_Billboard.fx");
 
 	billboard = new Billboard(billboardShader);
