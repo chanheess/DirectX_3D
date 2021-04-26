@@ -32,7 +32,7 @@ float4 PS_HpBar2D(VertexOutput input) : SV_Target
 {
     float4 color;
     
-    [flatten]
+    [flatten]   //flatten은 if의 양쪽 다 계산하고 맞는 부분을 결과값으로 선택하는 방식이다.
     if (input.Uv.x <= ratioHp)
     {
         color = float4(0, 0.5f, 0, 1);

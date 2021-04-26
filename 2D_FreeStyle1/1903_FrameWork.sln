@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FrameWork", "FrameWork\FrameWork.vcxproj", "{5B4D080B-5140-470D-831F-444A76BAC6D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		make|x64 = make|x64
+		make|x86 = make|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B4D080B-5140-470D-831F-444A76BAC6D2}.Debug|x64.ActiveCfg = Debug|x64
+		{5B4D080B-5140-470D-831F-444A76BAC6D2}.Debug|x64.Build.0 = Debug|x64
+		{5B4D080B-5140-470D-831F-444A76BAC6D2}.Debug|x86.ActiveCfg = Debug|Win32
+		{5B4D080B-5140-470D-831F-444A76BAC6D2}.Debug|x86.Build.0 = Debug|Win32
+		{5B4D080B-5140-470D-831F-444A76BAC6D2}.make|x64.ActiveCfg = make|x64
+		{5B4D080B-5140-470D-831F-444A76BAC6D2}.make|x64.Build.0 = make|x64
+		{5B4D080B-5140-470D-831F-444A76BAC6D2}.make|x86.ActiveCfg = make|Win32
+		{5B4D080B-5140-470D-831F-444A76BAC6D2}.make|x86.Build.0 = make|Win32
+		{5B4D080B-5140-470D-831F-444A76BAC6D2}.Release|x64.ActiveCfg = Release|x64
+		{5B4D080B-5140-470D-831F-444A76BAC6D2}.Release|x64.Build.0 = Release|x64
+		{5B4D080B-5140-470D-831F-444A76BAC6D2}.Release|x86.ActiveCfg = Release|Win32
+		{5B4D080B-5140-470D-831F-444A76BAC6D2}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B5FBBD82-441E-430D-8317-8060F2EB3E69}
+	EndGlobalSection
+EndGlobal

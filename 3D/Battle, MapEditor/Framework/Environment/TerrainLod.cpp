@@ -108,7 +108,6 @@ TerrainLod::~TerrainLod()
 	SafeDelete(buffer);
 	SafeDelete(frustum);
 	SafeDelete(camera);
-	SafeDelete(perspective);
 
 	SafeDelete(heightMap);
 

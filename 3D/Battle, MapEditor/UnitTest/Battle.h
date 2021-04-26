@@ -87,6 +87,7 @@ private:
 	float timing = 0.0f;
 	
 private:
+	//¹è¿­
 	ColliderObjectDesc** playerColliders;
 	ColliderObjectDesc** playerArrowColliders;
 	ColliderObjectDesc** weaponColliders;

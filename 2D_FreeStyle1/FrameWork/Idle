@@ -1,0 +1,11 @@
+<Idle xmlns:xsl="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <frame0 Time="0.2">
+        <Image Name="metalslug.png" Width="30" Height="38" OffsetX="0.0066666668" OffsetY="0.0024999999" CountX="0.056666669" countY="0.050000001"/>
+    </frame0>
+    <frame1 Time="0.2">
+        <Image Name="metalslug.png" Width="29" Height="38" OffsetX="0.058333334" OffsetY="0.0024999999" CountX="0.10666667" countY="0.050000001"/>
+    </frame1>
+    <frame2 Time="0.2">
+        <Image Name="metalslug.png" Width="29" Height="38" OffsetX="0.10666667" OffsetY="0.0024999999" CountX="0.155" countY="0.050000001"/>
+    </frame2>
+</Idle>

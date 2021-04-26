@@ -4,6 +4,7 @@
 
 void Battle::Initialize()
 {
+	//카메라의 초기 설정
 	Context::Get()->GetCamera()->RotationDegree(23, 0, 0);
 	Context::Get()->GetCamera()->Position(0 + 80, 32, -67 + 80);
 	((Freedom *)Context::Get()->GetCamera())->Speed(20, 2);
@@ -83,6 +84,9 @@ void Battle::Initialize()
 void Battle::Destroy()
 {
 	SafeDelete(terrain);
+	SafeDelete(playerHp);
+	for (UINT i = 0; i < MONSTERCOUNT + RANGEMONSTERCOUNT; i++)
+		SafeDelete(monsterHp[i]);
 }
 
 void Battle::Update()
@@ -108,7 +112,7 @@ void Battle::Update()
 				Vector3 tempMousePos = terrain->GetPickedPosition();
 				if (tempMousePos.z < 256.0f && tempMousePos.z > -256.0f &&
 					tempMousePos.x < 256.0f && tempMousePos.x > -256.0f)
-					mousePos = terrain->GetPickedPosition();
+					mousePos = tempMousePos;
 
 				if (player->CurrEquip() == 0)
 				{
