@@ -15,6 +15,8 @@ PlayScene.cpp - 게임플레이를 구동하는 Scene의 cpp입니다.
 https://github.com/chanheess/DirectX_Portfolio/blob/master/2D_FreeStyle1/FrameWork/Scenes/PlayScene.cpp
 
 
+그외의 전체 코드
+https://github.com/chanheess/DirectX_Portfolio/tree/master/2D_FreeStyle1/FrameWork
 
 
 [DirectX 3D]
