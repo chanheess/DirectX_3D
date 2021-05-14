@@ -17,11 +17,13 @@ public:
 	void JumpShoot(int pos);	//점프슛
 	void LayupDunk(int pos);	//레이업과 덩크슛
 	int BlockBallDirection() { return blockDirection; }	//블록후 공튕기는 위치
+
 	void Block();	//블락
 	bool Blocked() { return blocked; }	//블락 송출
 	bool BlockMotion() { return block; }	//블락중일때 송출
 	bool Blocking() { return blocking; }	//블락가능을 송출
 	Vector3 BlockPos() { return blockPos; }	//블락위치 송출
+
 	bool NoColi() { return noColi; }	//충돌방지 송출
 	int Dunkball() { return LayOrDunk; } //덩크일 때 공의 처리를 위해서 t/f 넘기기
 	void SlideLayDunk(); //레이업의 골을 넣은후 미끄러지듯이 더 앞쪽으로 넘어감

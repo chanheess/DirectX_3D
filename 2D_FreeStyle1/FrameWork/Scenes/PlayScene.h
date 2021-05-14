@@ -47,11 +47,15 @@ private:
 	bool noReplay; //두번이상재생안되게
 	
 	class MapBackground* map;
+
+	//클래스에 묶어도 될듯
 	class Goaldae2* frontGoaldae;
 	class Goaldae* backGoaldae;
+
 	class Ball* ball;
 	class ObjectX* objX;
 
+	//클래스에 묶어도 될듯
 	class Audio* endplay;
 	class Audio* countdown;
 	class Audio* rimout;
@@ -62,6 +66,7 @@ private:
 	class Audio* NoGoal;
 
 
+	//클래스에 묶어도 될듯
 	class score* scoreboard;
 	class score* start;
 	class score* win[2];

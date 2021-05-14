@@ -18,6 +18,7 @@ PlayScene::PlayScene()
 	ball = new Ball;
 	backGoaldae = new Goaldae;
 	frontGoaldae = new Goaldae2;
+
 	scoreboard = new score;
 	scoreboard->transform->Position(638, 765);
 	scoreboard->transform->Scale(Vector3(477, 71, 0));
@@ -34,6 +35,7 @@ PlayScene::PlayScene()
 	win[1]->transform->Position(638, 450);
 	win[1]->transform->Scale(Vector3(236, 60, 0));
 	win[1]->AddComponent(new Sprite(L"score.png", 0, 257, 236, 318));
+
 	//게임스코어 및 타임
 	{
 		int x = 0;
@@ -55,6 +57,7 @@ PlayScene::PlayScene()
 			timeNum[i]->transform->Scale(Vector3(56 * 0.7f, 59 * 0.7f, 0));
 			timeNum[i]->AddComponent(new Sprite(L"score.png", x2, 125, w2, 186));
 
+			//게임 스코어와 시간 png 위치변경
 			x += 30;
 			w += 30;
 			x2 += 56;
@@ -97,6 +100,7 @@ PlayScene::PlayScene()
 	PLAYER;
 	PLAYER2;
 	TIMEMANAGER->SetFrame(FIXFRAME);
+
 	startTime = 0;
 	delayTime = 0;
 	playTime = 0;
@@ -126,9 +130,9 @@ void PlayScene::Update()
 {
 	if(player1Point >= 15)
 		win[0]->Update();
-	if (player2Point >= 15)
+	else if (player2Point >= 15)
 		win[1]->Update();
-	if (player2Point <= 15 && player1Point <= 15)
+	else
 	{
 		PLAYER->Update();
 		PLAYER2->Update();
@@ -141,19 +145,22 @@ void PlayScene::Update()
 			timeNum[i]->Update();
 		}
 	}
+
 	scoreboard->Update();
 	map->Update();
 	frontGoaldae->Update();
 	backGoaldae->Update();
 	ball->Update();
 
-	//플레이어와 공의 위치와 x축값 적용
+	//플레이어와 공의 위치의 x축값 적용
 	playerPos = PLAYER->transform->Position();
 	playerPos2 = PLAYER2->transform->Position();
 	playerObjxPos = PLAYER->GetObj()->transform->Position();
 	playerObjxPos2 = PLAYER2->GetObj()->transform->Position();
 	ballPos = ball->transform->Position();
 	ballObjxPos = ball->GetObj()->transform->Position();
+
+	//공을 잡았나
 	if (PLAYER->IsHanding() == true)
 		ball->PlayerXPos(playerObjxPos);
 	else if (PLAYER2->IsHanding() == true)
@@ -188,6 +195,7 @@ void PlayScene::Update()
 		}
 		startTime = nowTime;
 	}
+
 	//점프볼때 공줍고 게임시작
 	if (((startTime + 3) <= nowTime) && (PLAYER->IsHanding() == true)
 		&& (PLAYER2->IsHanding() == false) && startTime != 0)
