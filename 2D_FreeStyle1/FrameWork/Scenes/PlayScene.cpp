@@ -730,207 +730,40 @@ void PlayScene::Render()
 	Vector3 vec = Input::Get()->ScreenPosition();
 	map->Render();
 	scoreboard->Render();
-	switch (player1Point)
+
+	//점수
 	{
-	case 0:
-		scoreNum[0]->Render();
-		break;
-	case 1:
-		scoreNum[1]->Render();
-		break;
-	case 2:
-		scoreNum[2]->Render();
-		break;
-	case 3:
-		scoreNum[3]->Render();
-		break;
-	case 4:
-		scoreNum[4]->Render();
-		break;
-	case 5:
-		scoreNum[5]->Render();
-		break;
-	case 6:
-		scoreNum[6]->Render();
-		break;
-	case 7:
-		scoreNum[7]->Render();
-		break;
-	case 8:
-		scoreNum[8]->Render();
-		break;
-	case 9:
-		scoreNum[9]->Render();
-		break;
-	case 10:
-		scoreNum[10]->Render();
-		scoreNum[0]->Render();
-		break;
-	case 11:
-		scoreNum[10]->Render();
-		scoreNum[1]->Render();
-		break;
-	case 12:
-		scoreNum[10]->Render();
-		scoreNum[2]->Render();
-		break;
-	case 13:
-		scoreNum[10]->Render();
-		scoreNum[3]->Render();
-		break;
-	case 14:
-		scoreNum[10]->Render();
-		scoreNum[4]->Render();
-		break;
-	case 15:
-		scoreNum[10]->Render();
-		scoreNum[5]->Render();
-		break;
-	case 16:
-		scoreNum[10]->Render();
-		scoreNum[6]->Render();
-		break;
-	case 17:
-		scoreNum[10]->Render();
-		scoreNum[7]->Render();
-		break;
+		if (player1Point < 10)
+		{
+			timeNum[player1Point]->Render();
+		}
+		else
+		{
+			timeNum[10]->Render();
+			timeNum[player1Point - 10]->Render();
+		}
+		if (player2Point < 10)
+		{
+			timeNum[player2Point]->Render();
+		}
+		else
+		{
+			timeNum[10]->Render();
+			timeNum[player2Point - 10]->Render();
+		}
 	}
-	switch (player2Point)
+	
+	//시간
+	if ((int)playCountTime < 10)
 	{
-	case 0:
-		scoreNum2[0]->Render();
-		break;	
-	case 1:		
-		scoreNum2[1]->Render();
-		break;	
-	case 2:		
-		scoreNum2[2]->Render();
-		break;	
-	case 3:		
-		scoreNum2[3]->Render();
-		break;	
-	case 4:		
-		scoreNum2[4]->Render();
-		break;	
-	case 5:		
-		scoreNum2[5]->Render();
-		break;	
-	case 6:		
-		scoreNum2[6]->Render();
-		break;	
-	case 7:		
-		scoreNum2[7]->Render();
-		break;	
-	case 8:		
-		scoreNum2[8]->Render();
-		break;	
-	case 9:		
-		scoreNum2[9]->Render();
-		break;
-	case 10:
-		scoreNum2[10]->Render();
-		scoreNum2[0]->Render();
-		break;
-	case 11:
-		scoreNum2[10]->Render();
-		scoreNum2[1]->Render();
-		break;
-	case 12:
-		scoreNum2[10]->Render();
-		scoreNum2[2]->Render();
-		break;
-	case 13:
-		scoreNum2[10]->Render();
-		scoreNum2[3]->Render();
-		break;
-	case 14:
-		scoreNum2[10]->Render();
-		scoreNum2[4]->Render();
-		break;
-	case 15:
-		scoreNum2[10]->Render();
-		scoreNum2[5]->Render();
-		break;
-	case 16:
-		scoreNum2[10]->Render();
-		scoreNum2[6]->Render();
-		break;
-	case 17:
-		scoreNum2[10]->Render();
-		scoreNum2[7]->Render();
-		break;
+		timeNum[(int)playCountTime]->Render();
 	}
-	switch ((int)playCountTime)
+	else
 	{
-	case 0:
-		timeNum[0]->Render();
-		break;
-	case 1:
-		timeNum[1]->Render();
-		break;
-	case 2:
-		timeNum[2]->Render();
-		break;
-	case 3:
-		timeNum[3]->Render();
-		break;
-	case 4:
-		timeNum[4]->Render();
-		break;
-	case 5:
-		timeNum[5]->Render();
-		break;
-	case 6:
-		timeNum[6]->Render();
-		break;
-	case 7:
-		timeNum[7]->Render();
-		break;
-	case 8:
-		timeNum[8]->Render();
-		break;
-	case 9:
-		timeNum[9]->Render();
-		break;
-	case 10:
 		timeNum[10]->Render();
-		timeNum[0]->Render();
-		break;
-	case 11:
-		timeNum[10]->Render();
-		timeNum[1]->Render();
-		break;
-	case 12:
-		timeNum[10]->Render();
-		timeNum[2]->Render();
-		break;
-	case 13:
-		timeNum[10]->Render();
-		timeNum[3]->Render();
-		break;
-	case 14:
-		timeNum[10]->Render();
-		timeNum[4]->Render();
-		break;
-	case 15:
-		timeNum[10]->Render();
-		timeNum[5]->Render();
-		break;
-	case 16:
-		timeNum[10]->Render();
-		timeNum[6]->Render();
-		break;
-	case 17:
-		start->Render();
-		timeNum[10]->Render();
-		timeNum[7]->Render();
-		break;
-	case 18:
-		start->Render();
-		timeNum[10]->Render();
-		timeNum[8]->Render();
-		break;
+		timeNum[(int)playCountTime - 10]->Render();
 	}
+	
 	// 0:공보다 위고 다른player보다 위 /1: 공보다 위고 다른player보다 아래
 	// 2:공보다 아래고 다른 player보다 위 / 3:공보다 아래고 다른 player보다 아래
 	int player1 = 0;	
