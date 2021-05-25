@@ -735,21 +735,21 @@ void PlayScene::Render()
 	{
 		if (player1Point < 10)
 		{
-			timeNum[player1Point]->Render();
+			scoreNum[player1Point]->Render();
 		}
 		else
 		{
-			timeNum[10]->Render();
-			timeNum[player1Point - 10]->Render();
+			scoreNum[10]->Render();
+			scoreNum[player1Point - 10]->Render();
 		}
 		if (player2Point < 10)
 		{
-			timeNum[player2Point]->Render();
+			scoreNum2[player2Point]->Render();
 		}
 		else
 		{
-			timeNum[10]->Render();
-			timeNum[player2Point - 10]->Render();
+			scoreNum2[10]->Render();
+			scoreNum2[player2Point - 10]->Render();
 		}
 	}
 	
