@@ -7,8 +7,8 @@
 
 void Main::Initialize()
 {
-	//Push(new TerrainEditor());
-	Push(new Battle());
+	Push(new TerrainEditor());
+	//Push(new Battle());
 }
 
 void Main::Ready()
