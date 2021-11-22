@@ -60,7 +60,7 @@ void TerrainEditor::Render()
 
 	//BillBoard
 	{
-		if (startBillboard == true)
+		if (startBillboard)
 			billboard->Render();
 	}
 }
