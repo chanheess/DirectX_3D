@@ -2,7 +2,7 @@
 DirectX를 통한 전투와 맵을 구현하였습니다. - vs17버전 사용
 
 
-https://chanheess.tistory.com/7?category=1148447
+https://www.youtube.com/watch?time_continue=1&v=ZNbdvuJlk1w&feature=emb_logo
 
 
 
