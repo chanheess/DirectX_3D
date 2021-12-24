@@ -2,20 +2,6 @@
 DirectX를 통한 전투와 맵을 구현하였습니다. - vs17버전 사용
 
 
-https://www.youtube.com/watch?time_continue=1&v=ZNbdvuJlk1w&feature=emb_logo
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 TerrainEditor.cpp  -  Terrain의 기능들을 동작하는 코드입니다.
 https://github.com/chanheess/DirectX_3D_Portfolio/blob/master/Battle%2C%20MapEditor/UnitTest/TerrainEditor.cpp
